@@ -18,7 +18,7 @@ class TileArea
         TileArea(const string &regionName);
         TileArea(Texture2D &texture);
         void Init(Texture2D &texture);
-        void Render(Vector2 position, int width, int height, Color tint);
+        void Draw(Vector2 position, int width, int height, Color tint);
 
     private:
 

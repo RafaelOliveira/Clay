@@ -20,13 +20,13 @@ class Engine
         static RenderTexture2D scalingTexture;
         static Rectangle srcScaling;
         static Rectangle dstScaling;
-        static void RenderScalingTextureFullscreen();
+        static void DrawScalingTexture();
 };
 
-inline void Engine::RenderScalingTextureFullscreen()
+inline void Engine::DrawScalingTexture()
 {
     // NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
 	DrawTexturePro(scalingTexture.texture, srcScaling, dstScaling, (Vector2){ 0, 0 }, 0, WHITE);
 }
 
-#endif // ENGINE_H
+#endif

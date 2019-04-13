@@ -22,7 +22,7 @@ class Tileset
         void Init(Texture2D &texture, int tileWidth, int tileHeight);
         int GetTileWidth();
         int GetTileHeight();
-        void Render(int index, Vector2 &position, Color tint = WHITE);
+        void Draw(int index, Vector2 &position, Color tint = WHITE);
         virtual ~Tileset();
 
     private:
@@ -45,7 +45,7 @@ inline int Tileset::GetTileHeight()
     return _rect.height;
 }
 
-inline void Tileset::Render(int index, Vector2 &position, Color tint)
+inline void Tileset::Draw(int index, Vector2 &position, Color tint)
 {
     _x = index % widthInTiles;
     _y = index / widthInTiles;

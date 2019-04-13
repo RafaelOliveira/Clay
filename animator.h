@@ -44,7 +44,7 @@ class Animator
         void Reverse();
         void FlipX(bool value = true);
         void FlipY(bool value = true);
-        void Render(Vector2 &position, Color tint);
+        void Draw(Vector2 &position, Color tint);
 
     private:
 
@@ -89,9 +89,9 @@ inline bool Animator::IsReversed()
     return (direction == -1);
 }
 
-inline void Animator::Render(Vector2 &position, Color tint)
+inline void Animator::Draw(Vector2 &position, Color tint)
 {
-    region->Render(position, tint);
+    region->Draw(position, tint);
 }
 
 #endif // ANIMATOR_H

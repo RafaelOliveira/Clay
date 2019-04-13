@@ -20,7 +20,7 @@ class State
 
         virtual void Init();
         virtual void Update();
-        virtual void Render();
+        virtual void Draw();
         virtual void Destroy();
 };
 

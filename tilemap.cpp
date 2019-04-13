@@ -148,7 +148,7 @@ vector<int**> Tilemap::GetLayersFromPyxelEdit(const string &fileName, int &rows,
 	return layers;
 }
 
-void Tilemap::Render(Vector2 &position, Color tint)
+void Tilemap::Draw(Vector2 &position, Color tint)
 {
 	Vector2 _pos;
 
@@ -160,13 +160,13 @@ void Tilemap::Render(Vector2 &position, Color tint)
 			{
 				_pos.x = position.x + (mx * GetTileWidth());
 				_pos.y = position.y + (my * GetTileHeight());
-				tileset->Render(data[my][mx], _pos, tint);
+				tileset->Draw(data[my][mx], _pos, tint);
 			}
 		}
 	}
 }
 
-void Tilemap::RenderInCamera(Vector2 &position, Camera2D &camera, Color tint)
+void Tilemap::DrawInCamera(Vector2 &position, Camera2D &camera, Color tint)
 {
 	if 	(((position.x + width) < camera.offset.x) || (position.x > (camera.offset.x + Engine::screenWidth)) ||
 			((position.y + height) < camera.offset.y) || (position.y > (camera.offset.y + Engine::screenHeight)))
@@ -196,7 +196,7 @@ void Tilemap::RenderInCamera(Vector2 &position, Camera2D &camera, Color tint)
 				_pos.x = position.x + (c * GetTileWidth());
 				_pos.y = position.y + (r * GetTileHeight());
 				
-				tileset->Render(tile, _pos, tint);
+				tileset->Draw(tile, _pos, tint);
 			}
 		}
 	}	

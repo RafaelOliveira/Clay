@@ -42,12 +42,12 @@ void Engine::GameLoop()
         if (useScaling)
         {
             BeginTextureMode(scalingTexture);
-            State::active->Render();
+            State::active->Draw();
             EndTextureMode();
-            RenderScalingTextureFullscreen();			
+            DrawScalingTexture();			
         }
         else
-            State::active->Render();
+            State::active->Draw();
         
         EndDrawing();
     }

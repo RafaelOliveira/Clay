@@ -15,7 +15,7 @@ void TileArea::Init(Texture2D &texture)
 	region = new Region(texture, 0, 0, texture.width, texture.height);
 }
 
-void TileArea::Render(Vector2 position, int width, int height, Color tint)
+void TileArea::Draw(Vector2 position, int width, int height, Color tint)
 {
 	_sx = position.x;
 

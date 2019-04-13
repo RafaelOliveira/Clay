@@ -13,17 +13,17 @@ class Region
         Region(Texture2D &texture, float sx, float sy, int width, int height);
         void FlipX(bool value = true);
         void FlipY(bool value = true);
-        void Render(Vector2 &position, Color tint = WHITE);
-        void RenderScaled(Vector2 &position, Vector2 &scaling, Color tint = WHITE);
+        void Draw(Vector2 &position, Color tint = WHITE);
+        void DrawScaled(Vector2 &position, Vector2 &scaling, Color tint = WHITE);
 
 };
 
-inline void Region::Render(Vector2 &position, Color tint)
+inline void Region::Draw(Vector2 &position, Color tint)
 {
     DrawTextureRec(texture, rect, position, tint);
 }
 
-inline void Region::RenderScaled(Vector2 &position, Vector2 &scaling, Color tint)
+inline void Region::DrawScaled(Vector2 &position, Vector2 &scaling, Color tint)
 {
     Rectangle dstScaling { position.x, position.y, scaling.x, scaling.y };
 

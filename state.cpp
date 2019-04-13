@@ -38,6 +38,6 @@ void State::Init() {}
 
 void State::Update() {}
 
-void State::Render() {}
+void State::Draw() {}
 
 void State::Destroy() {}
