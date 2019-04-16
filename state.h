@@ -6,22 +6,22 @@
 
 class State
 {
-    private:
+	private:
 
-        static std::map<std::string, State> stateList;
+		static std::map<std::string, State> stateList;
 
-    public:
+	public:
 
-        static State *active;
+		static State *active;
 
-        static void AddState(State &state, std::string name, bool go = false);
-        static void RemoveState(std::string name, bool destroy = false);
-        static void SwitchState(std::string name);
+		static void AddState(State &state, std::string name, bool go = false);
+		static void RemoveState(std::string name, bool destroy = false);
+		static void SwitchState(std::string name);
 
-        virtual void Init();
-        virtual void Update();
-        virtual void Draw();
-        virtual void Destroy();
+		virtual void Init();
+		virtual void Update();
+		virtual void Draw();
+		virtual void Destroy();
 };
 
 #endif

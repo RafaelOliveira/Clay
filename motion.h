@@ -5,19 +5,19 @@
 
 class Motion
 {
-    public:
+	public:
 
-        Vector2 velocity;
-        Vector2 maxVelocity;
-        Vector2 acceleration;
-        Vector2 drag;
+		Vector2 velocity;
+		Vector2 maxVelocity;
+		Vector2 acceleration;
+		Vector2 drag;
 
-        Motion();
-        void Update();
+		Motion();
+		void Update();
 
-    private:
+	private:
 
-        float ComputeVelocity(float compVelocity, float compAcceleration, float compDrag, float compMaxVelocity);
+		float ComputeVelocity(float compVelocity, float compAcceleration, float compDrag, float compMaxVelocity);
 };
 
 #endif // MOTION_H

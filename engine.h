@@ -5,27 +5,27 @@
 
 class Engine
 {
-    public:
+	public:
 
-        static int screenWidth;
-        static int screenHeight;
+		static int screenWidth;
+		static int screenHeight;
 
-        static void Init(int screenWidth, int screenHeight, const char *title);
-        static void SetScaling(int fromWidth, int fromHeight);
-        static void GameLoop();
+		static void Init(int screenWidth, int screenHeight, const char *title);
+		static void SetScaling(int fromWidth, int fromHeight);
+		static void GameLoop();
 
-    private:
+	private:
 
-        static bool useScaling;        
-        static RenderTexture2D scalingTexture;
-        static Rectangle srcScaling;
-        static Rectangle dstScaling;
-        static void DrawScalingTexture();
+		static bool useScaling;        
+		static RenderTexture2D scalingTexture;
+		static Rectangle srcScaling;
+		static Rectangle dstScaling;
+		static void DrawScalingTexture();
 };
 
 inline void Engine::DrawScalingTexture()
 {
-    // NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
+	// NOTE: Render texture must be y-flipped due to default OpenGL coordinates (left-bottom)
 	DrawTexturePro(scalingTexture.texture, srcScaling, dstScaling, (Vector2){ 0, 0 }, 0, WHITE);
 }
 

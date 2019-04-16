@@ -10,19 +10,19 @@ using std::string;
 
 class TileArea
 {
-    public:
+	public:
 
-        Region *region;
+		Region *region;
 
-        TileArea(){};
-        TileArea(const string &regionName);
-        TileArea(Texture2D &texture);
-        void Init(Texture2D &texture);
-        void Draw(Vector2 position, int width, int height, Color tint);
+		TileArea(){};
+		TileArea(const string &regionName);
+		TileArea(Texture2D &texture);
+		void Init(Texture2D &texture);
+		void Draw(Vector2 position, int width, int height, Color tint);
 
-    private:
+	private:
 
-        float _sx;
+		float _sx;
 };
 
 #endif

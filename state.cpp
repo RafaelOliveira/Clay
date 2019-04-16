@@ -7,31 +7,31 @@ State *State::active;
 
 void State::AddState(State &state, std::string name, bool go)
 {
-    stateList.insert(make_pair(name, state));
+	stateList.insert(make_pair(name, state));
 
-    if (go)
-    {
-        active = &state;
-        active->Init();
-    }
+	if (go)
+	{
+		active = &state;
+		active->Init();
+	}
 }
 
 void State::RemoveState(std::string name, bool destroy)
 {
-    std::map<std::string, State>::iterator it = stateList.find(name);
+	std::map<std::string, State>::iterator it = stateList.find(name);
 
-    if (destroy)
-        it->second.Destroy();
+	if (destroy)
+		it->second.Destroy();
 
-    stateList.erase(it);
+	stateList.erase(it);
 }
 
 void State::SwitchState(std::string name)
 {
-    State state = stateList[name];
+	State state = stateList[name];
 
-    state.Init();
-    active = &state;
+	state.Init();
+	active = &state;
 }
 
 void State::Init() {}
