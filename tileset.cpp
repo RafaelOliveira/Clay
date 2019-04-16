@@ -2,13 +2,17 @@
 
 Tileset::Tileset(const string &regionName, int tileWidth, int tileHeight)
 {
-    region = Atlas::GetRegion(regionName);
-    Setup(tileWidth, tileHeight);
+    Init(regionName, tileWidth, tileHeight);
 }
 
 Tileset::Tileset(Texture2D &texture, int tileWidth, int tileHeight)
 {
-    region = new Region(texture, 0, 0, texture.width, texture.height);
+    Init(texture, tileWidth, tileHeight);
+}
+
+void Tileset::Init(const string &regionName, int tileWidth, int tileHeight)
+{
+    region = Atlas::GetRegion(regionName);
     Setup(tileWidth, tileHeight);
 }
 

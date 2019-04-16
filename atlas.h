@@ -1,11 +1,15 @@
 #ifndef ATLAS_H
 #define ATLAS_H
 
+#include <fstream>
+#include <iostream>
+#include <cstdlib>
 #include <map>
 #include <string>
 #include <vector>
 #include "raylib.h"
 #include "region.h"
+#include "util.h"
 
 using std::map;
 using std::string;

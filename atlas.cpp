@@ -1,8 +1,4 @@
-#include <fstream>
-#include <iostream>
-#include <cstdlib>
 #include "atlas.h"
-#include "util.h"
 
 map<string, Region> Atlas::cache;
 
