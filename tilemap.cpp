@@ -33,9 +33,9 @@ void Tilemap::ClearTile(int x, int y)
 	SetTile(x, y, -1);
 }
 
-bool Tilemap::CheckValidTile(int x, int y)
+bool Tilemap::CheckPositionInside(int px, int py)
 {
-	if (x < 0 || x > columns - 1 || y < 0 || y > rows - 1)		
+	if (px < 0 || px > columns - 1 || py < 0 || py > rows - 1)		
 		return false;
 	else		
 		return true;

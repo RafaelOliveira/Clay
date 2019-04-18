@@ -24,7 +24,7 @@ class Tilemap
 		void SetTile(int x, int y, int value);
 		int GetTile(int x, int y);
 		void ClearTile(int x, int y);
-		bool CheckValidTile(int x, int y);
+		bool CheckPositionInside(int px, int py);
 		void LoadEmpty(int columns, int rows);
 		void LoadFrom2DArray(int **array, int rows, int columns);
 		static vector<int**> GetLayersFromPyxelEdit(const string &fileName, int &rows, int &columns);
