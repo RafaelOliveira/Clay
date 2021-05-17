@@ -10,6 +10,8 @@ class Engine
 		static int screenWidth;
 		static int screenHeight;
 
+		static bool finishApp;
+
 		static void Init(int screenWidth, int screenHeight, const char *title);
 		static void SetScaling(int fromWidth, int fromHeight);
 		static void GameLoop();

@@ -7,6 +7,7 @@ bool Engine::useScaling = false;
 RenderTexture2D Engine::scalingTexture;
 Rectangle Engine::srcScaling { 0.0, 0.0, 0.0, 0.0 };
 Rectangle Engine::dstScaling { 0.0, 0.0, 0.0, 0.0 };
+bool Engine::finishApp = false;
 
 void Engine::Init(int screenWidth, int screenHeight, const char *title)
 {
@@ -15,6 +16,8 @@ void Engine::Init(int screenWidth, int screenHeight, const char *title)
 	
 	InitWindow(screenWidth, screenHeight, title);
 	SetTargetFPS(60);
+
+	finishApp = false;
 }
 
 void Engine::SetScaling(int fromWidth, int fromHeight)
@@ -50,6 +53,9 @@ void Engine::GameLoop()
 			State::active->Draw();
 		
 		EndDrawing();
+
+		if (finishApp)
+			break;
 	}
 
 	// De-Initialization

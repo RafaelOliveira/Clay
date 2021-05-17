@@ -29,11 +29,11 @@ class Tilemap
 		void LoadFrom2DArray(int **array, int rows, int columns);
 		static vector<int**> GetLayersFromPyxelEdit(const string &fileName, int &rows, int &columns);
 		void Draw(Vector2 &position, Color tint);
+		void Draw(Vector2 &position, int tileX, int tileY, int widthInTiles, int heightInTiles, Color tint);
 		void DrawInCamera(Vector2 &position, Camera2D &camera, Color tint = WHITE);
 
 	private:
-		
-		Vector2 _pos;
+				
 		int _startCol;
 		int _endCol;
 		int _startRow;

@@ -72,7 +72,7 @@ vector<Vector2> GetPointsCubicBezierPath(vector<float> x, vector<float> y, int s
 {
 	vector<Vector2> points;
 
-	uint i = 0;
+	unsigned int i = 0;
 	float  t;
 	Vector2 p;
 
