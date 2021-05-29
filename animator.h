@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <cstdlib>
+#include <stdexcept>
 #include "raylib.h"
 #include "region.h"
 
@@ -56,7 +58,7 @@ class Animator
 		map<string, AnimData> animations;
 		AnimData *animation;
 		string nameAnim;
-		int index;
+		size_t index;
 };
 
 inline void Animator::AddAnimation(const string &name, vector<Region*> regions, int fps, void (*OnComplete)())

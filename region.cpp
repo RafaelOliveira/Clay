@@ -5,8 +5,8 @@ Region::Region(Texture2D &texture, float sx, float sy, int width, int height) : 
 {
 	rect.x = sx;
 	rect.y = sy;
-	rect.width = width;
-	rect.height = height;
+	rect.width = float(width);
+	rect.height = float(height);
 }
 
 void Region::FlipX(bool value)

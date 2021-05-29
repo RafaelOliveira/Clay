@@ -8,14 +8,15 @@
 #include "tilemap.h"
 #include "util.h"
 
-Tilemap::Tilemap(Tileset &tileset)
+void Tilemap::Init(Tileset& tileset, int** data, int rows, int columns)
 {
 	this->tileset = &tileset;
-}
+	this->rows = rows;
+	this->columns = columns;
+	this->data = data;
 
-void Tilemap::Init(Tileset &tileset)
-{
-	this->tileset = &tileset;
+	height = rows * GetTileHeight();
+	width = columns * GetTileWidth();
 }
 
 void Tilemap::SetTile(int x, int y, int value)
@@ -60,92 +61,81 @@ void Tilemap::LoadEmpty(int columns, int rows)
 	}
 }
 
-void Tilemap::LoadFrom2DArray(int **array, int rows, int columns)
+void Tilemap::CopyFrom2DArray(int **array)
 {
-	data = new int*[rows];
-
 	for (int y = 0; y < rows; ++y)
 	{
-		data[y] = new int[columns];
-
 		for (int x = 0; x < columns; ++x)
 			data[y][x] = array[y][x];
 	}
-
-	this->rows = rows;
-	this->columns = columns;
-
-	height = rows * GetTileHeight();
-	width = columns * GetTileWidth();
 }
 
-vector<int**> Tilemap::GetLayersFromPyxelEdit(const string &fileName, int &rows, int &columns)
+vector<Tilemap> Tilemap::CreateFromPyxelEdit(const string &fileName, Tileset &tileset)
 {
-	columns = 0;
-	rows = 0;
+	const char* fileNameStr = fileName.c_str();
 
-	vector<int**> layers;
-	vector<string> lines;
-	int **layer;
-
-	std::ifstream inf(fileName);
-
-	if (!inf)
+	if (!FileExists(fileNameStr))
 	{
 		std::cerr << "(Tilemap.CreateFromPyxelEdit) file " + fileName + " not found";
 		exit(1);
 	}
-	else
+	
+	
+	const string content = string(LoadFileText(fileNameStr));
+	
+	return CreateFromPyxelEditString(content, tileset);
+}
+
+vector<Tilemap> Tilemap::CreateFromPyxelEditString(const string& content, Tileset &tileset)
+{
+	int columns = 0;
+	int rows = 0;
+	int** layer;
+
+	vector<Tilemap> mapList;
+	vector<string> lines = split(content, '\n');
+
+	for (size_t i = 0; i < lines.size(); i++)
 	{
-		while (inf)
+		if (lines[i].length() > 0)
 		{
-			string line;
-		
-			std::getline(inf, line);
-			rtrim(line);
+			vector<string> tokens = split(lines[i], ' ');
 
-			lines.push_back(line);
-		}
-
-		for (size_t i = 0; i < lines.size(); i++)
-		{
-			if (lines[i].length() > 0)
+			if (tokens[0] == "tileswide")
+				columns = std::stoi(tokens[1]);
+			else if (tokens[0] == "tileshigh")
+				rows = std::stoi(tokens[1]);
+			else if (tokens[0] == "layer")
 			{
-				vector<string> tokens = split(lines[i], ' ');
+				layer = new int* [rows];
 
-				if (tokens[0] == "tileswide")
-					columns = std::stoi(tokens[1]);
-				else if (tokens[0] == "tileshigh")
-					rows = std::stoi(tokens[1]);
-				else if (tokens[0] == "layer")
+				for (int y = 0; y < rows; ++y)
 				{
-					layer = new int*[rows];
+					layer[y] = new int[columns];
 
-					for (int y = 0; y < rows; ++y)
-					{
-						layer[y] = new int[columns];
-
-						for (int x = 0; x < columns; ++x)
-							layer[y][x] = -1;
-					}
-
-					int lineStart = i + 1;
-					
-					for (int py = lineStart; py < (lineStart + rows); ++py)
-					{
-						vector<string> data = split(lines[py], ',');
-
-						for (int px = 0; px < columns; ++px)
-							layer[py - lineStart][px] = std::stoi(data[px]);
-					}
-					
-					layers.push_back(layer);
+					for (int x = 0; x < columns; ++x)
+						layer[y][x] = -1;
 				}
+
+				size_t lineStart = i + 1;
+
+				for (size_t py = lineStart; py < (lineStart + rows); ++py)
+				{
+					vector<string> data = split(lines[py], ',');
+
+					for (int px = 0; px < columns; ++px)
+						layer[py - lineStart][px] = std::stoi(data[px]);
+				}
+
+				Tilemap tilemap;
+
+				tilemap.Init(tileset, layer, rows, columns);
+				mapList.push_back(tilemap);
 			}
 		}
 	}
-	
-	return layers;
+
+	return mapList;
 }
 
 void Tilemap::Draw(Vector2 &position, Color tint)
@@ -192,9 +182,9 @@ void Tilemap::DrawInCamera(Vector2 &position, Camera2D &camera, Color tint)
 			((position.y + height) < camera.offset.y) || (position.y > (camera.offset.y + Engine::screenHeight)))
 				return;
 
-	_startCol = floor((position.x > camera.offset.x ? 0 : (camera.offset.x - position.x)) / GetTileWidth());
+	_startCol = int(floor((position.x > camera.offset.x ? 0 : (camera.offset.x - position.x)) / GetTileWidth()));
 	_endCol = int(((position.x + width) > (camera.offset.x + Engine::screenWidth) ? (camera.offset.x + Engine::screenWidth - position.x) : width) / GetTileWidth());
-	_startRow = floor((position.y > camera.offset.y ? 0 : (camera.offset.y - position.y)) / GetTileHeight());
+	_startRow = int(floor((position.y > camera.offset.y ? 0 : (camera.offset.y - position.y)) / GetTileHeight()));
 	_endRow = int(((position.y + height) > (camera.offset.y + Engine::screenHeight) ? (camera.offset.y + Engine::screenHeight - position.y) : height) / GetTileHeight());
 
 	if (_endCol < columns)

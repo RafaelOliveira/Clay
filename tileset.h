@@ -11,8 +11,6 @@ class Tileset
 	public:
 
 		Region *region;
-		//int tileWidth;
-		//int tileHeight;
 		int widthInTiles;
 		int heightInTiles;
 
@@ -24,7 +22,6 @@ class Tileset
 		int GetTileWidth();
 		int GetTileHeight();
 		void Draw(int index, Vector2 &position, Color tint = WHITE);
-		virtual ~Tileset();
 
 	private:
 
@@ -38,18 +35,18 @@ class Tileset
 
 inline int Tileset::GetTileWidth()
 {
-	return _rect.width;
+	return (int)_rect.width;
 }
 
 inline int Tileset::GetTileHeight()
 {
-	return _rect.height;
+	return (int)_rect.height;
 }
 
 inline void Tileset::Draw(int index, Vector2 &position, Color tint)
 {
-	_x = index % widthInTiles;
-	_y = index / widthInTiles;
+	_x = (float)(index % widthInTiles);
+	_y = (float)(index / widthInTiles);
 
 	_rect.x = region->rect.x + (_x * _rect.width);
 	_rect.y = region->rect.y + (_y * _rect.height);

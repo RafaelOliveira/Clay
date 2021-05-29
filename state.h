@@ -4,19 +4,22 @@
 #include <string>
 #include <map>
 
+using std::string;
+using std::map;
+
 class State
 {
 	private:
 
-		static std::map<std::string, State> stateList;
+		static map<string, State> stateList;
 
 	public:
 
 		static State *active;
 
-		static void AddState(State &state, std::string name, bool go = false);
-		static void RemoveState(std::string name, bool destroy = false);
-		static void SwitchState(std::string name);
+		static void AddState(State *state, string name, bool go = false);
+		static void RemoveState(string name, bool destroy = false);
+		static void SwitchState(string name);
 
 		virtual void Init();
 		virtual void Update();

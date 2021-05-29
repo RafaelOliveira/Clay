@@ -17,8 +17,7 @@ class Tilemap
 		int height;
 
 		Tilemap(){};
-		Tilemap(Tileset &tileset);
-		void Init(Tileset &tileset);
+		void Init(Tileset& tileset, int** data, int rows, int columns);
 		int GetTileWidth();
 		int GetTileHeight();
 		void SetTile(int x, int y, int value);
@@ -26,18 +25,19 @@ class Tilemap
 		void ClearTile(int x, int y);
 		bool CheckPositionInside(int px, int py);
 		void LoadEmpty(int columns, int rows);
-		void LoadFrom2DArray(int **array, int rows, int columns);
-		static vector<int**> GetLayersFromPyxelEdit(const string &fileName, int &rows, int &columns);
+		void CopyFrom2DArray(int **array);
+		static vector<Tilemap> CreateFromPyxelEdit(const string &fileName, Tileset& tileset);
+		static vector<Tilemap> CreateFromPyxelEditString(const string& content, Tileset& tileset);
 		void Draw(Vector2 &position, Color tint);
 		void Draw(Vector2 &position, int tileX, int tileY, int widthInTiles, int heightInTiles, Color tint);
 		void DrawInCamera(Vector2 &position, Camera2D &camera, Color tint = WHITE);
 
 	private:
 				
-		int _startCol;
-		int _endCol;
-		int _startRow;
-		int _endRow;
+		int _startCol = 0;
+		int _endCol = 0;
+		int _startRow = 0;
+		int _endRow = 0;
 };
 
 inline int Tilemap::GetTileWidth()

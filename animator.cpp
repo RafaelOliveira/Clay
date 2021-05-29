@@ -1,5 +1,4 @@
 #include "animator.h"
-#include <cstdlib>
 
 AnimData::AnimData(vector<Region*> regions, int fps, void (*OnComplete)()) : regions(regions),
 	fps(fps), totalFrames((int)regions.size()), OnComplete(OnComplete)

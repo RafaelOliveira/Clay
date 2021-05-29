@@ -1,9 +1,6 @@
-#include <sstream>
-#include <algorithm> 
-#include <cctype>
-#include <locale>
 #include "util.h"
-#include "engine.h"
+
+Vector2 Util::posZero { 0, 0 };
 
 vector<string> split(const string &s, char delimiter)
 {
@@ -55,4 +52,35 @@ std::string rtrim_copy(std::string s) {
 std::string trim_copy(std::string s) {
 	trim(s);
 	return s;
+}
+
+void free_array(char** array_string)
+{
+	int i = 0;
+
+	while (array_string[i])
+	{
+		free(array_string[i]);
+		i++;
+	}
+
+	free(array_string);
+	array_string = NULL;
+}
+
+void free_matrix_ints(int** matrix_ints, int h)
+{
+	for (int i = 0; i < h; i++)
+		free(matrix_ints[i]);
+
+	/*int i = 0;
+
+	while (array_ints[i])
+	{
+		free(array_ints[i]);
+		i++;
+	}*/
+
+	free(matrix_ints);
+	matrix_ints = NULL;
 }
