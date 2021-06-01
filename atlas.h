@@ -30,7 +30,7 @@ class Atlas
 		static void SaveRegion(Region &region, const string &name);
 		static void SaveRegionList(vector<Region> &regions, const string &baseName);
 		static void RemoveRegion(const string &regionName);
-		static void LoadSimpleAtlas(Texture2D &texture, const string &fileName);
+		static void LoadData(Texture2D &texture, const string &fileName);
 		static map<string, Region> CreateRegionsFromSimpleAtlas(Texture2D &texture, string &fileName);
 
 	private:

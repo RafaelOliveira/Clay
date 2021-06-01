@@ -98,3 +98,89 @@ void Body::CheckPlatformTileCollision(Grid *grid, Vector2 *velocity, int tileWid
 
     pos.y += velocity->y;
 }
+
+void Body::CheckFreeTileCollision(Grid& grid, Vector2& velocity, int tileWidth, int tileHeight)
+{
+    bool collision = true;
+    int tx = 0;
+    int tx1 = 0;
+    int tx2 = 0;
+    int ty = 0;
+    int ty1 = 0;
+    int ty2 = 0;
+    float amount = 0;
+
+    if (velocity.x != 0)
+    {
+        // x part
+
+        if (velocity.x < 0)
+        {
+            tx = int(((pos.x + hitbox.x) + velocity.x) / tileWidth);
+            amount = 0.1F;
+        }
+        else
+        {
+            tx = int(((pos.x + hitbox.x + hitbox.width) + velocity.x) / tileWidth);
+            amount = -0.1F;
+        }
+
+        ty1 = int((pos.y + hitbox.y) / tileHeight);
+        ty2 = int((pos.y + hitbox.y + hitbox.height) / tileHeight);
+
+        while (collision)
+        {
+            if (grid.GetTile(tx, ty1) || grid.GetTile(tx, ty2))
+            {
+                velocity.x += amount;
+
+                if (velocity.x < 0)
+                    tx = int(((pos.x + hitbox.x) + velocity.x) / tileWidth);
+                else
+                    tx = int(((pos.x + hitbox.x + hitbox.width) + velocity.x) / tileWidth);
+            }
+            else
+                collision = false;
+        }
+
+        pos.x += velocity.x;
+    }
+
+    if (velocity.y != 0)
+    {
+        // y part
+
+        if (velocity.y < 0)
+        {
+            ty = int(((pos.y + hitbox.y) + velocity.y) / tileHeight);
+            amount = 0.1F;
+        }
+        else
+        {
+            ty = int(((pos.y + hitbox.y + hitbox.height) + velocity.y) / tileHeight);
+            amount = -0.1F;
+        }
+
+        tx1 = int((pos.x + hitbox.x) / tileWidth);
+        tx2 = int((pos.x + hitbox.x + hitbox.width) / tileWidth);
+
+        collision = true;
+
+        while (collision)
+        {
+            if (grid.GetTile(tx1, ty) || grid.GetTile(tx2, ty))
+            {
+                velocity.y += amount;
+
+                if (velocity.y < 0)
+                    ty = int(((pos.y + hitbox.y) + velocity.y) / tileHeight);
+                else                
+                    ty = int(((pos.y + hitbox.y + hitbox.height) + velocity.y) / tileHeight);
+            }
+            else
+                collision = false;
+        }
+
+        pos.y += velocity.y;
+    }
+}

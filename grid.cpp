@@ -1,16 +1,16 @@
 #include "grid.h"
 
-void Grid::Init(Tilemap *tilemap, int solidTiles[], int arraySize)
+void Grid::Init(Tilemap& tilemap, int solidTiles[], int arraySize)
 {
-	data = new bool* [tilemap->rows];
+	data = new bool* [tilemap.rows];
 
-	for (int y = 0; y < tilemap->rows; ++y)
+	for (int y = 0; y < tilemap.rows; ++y)
 	{
-		data[y] = new bool[tilemap->columns];
+		data[y] = new bool[tilemap.columns];
 
-		for (int x = 0; x < tilemap->columns; ++x)
+		for (int x = 0; x < tilemap.columns; ++x)
 		{
-			int id = tilemap->GetTile(x, y);
+			int id = tilemap.GetTile(x, y);
 			data[y][x] = false;
 			
 			for (int i = 0; i < arraySize; i++)

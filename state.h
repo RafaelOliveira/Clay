@@ -17,7 +17,7 @@ class State
 
 		static State *active;
 
-		static void AddState(State *state, string name, bool go = false);
+		static void AddState(State& state, string name, bool go = false);
 		static void RemoveState(string name, bool destroy = false);
 		static void SwitchState(string name);
 

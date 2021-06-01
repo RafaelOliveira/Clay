@@ -77,7 +77,7 @@ void Atlas::SaveRegionList(vector<Region> &regions, const string &baseName)
 		cache.insert(std::make_pair(baseName + "-" + std::to_string(i), regions[i - 1]));
 }
 
-void Atlas::LoadSimpleAtlas(Texture2D &texture, const string &fileName)
+void Atlas::LoadData(Texture2D &texture, const string &fileName)
 {
 	std::ifstream inf(fileName);
 

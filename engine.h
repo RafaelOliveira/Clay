@@ -5,9 +5,9 @@
 #include "state.h"
 #include "util.h"
 
-/*#ifdef PHYSAC_IMPLEMENTATION
+#ifdef PHYSAC_IMPLEMENTATION
 #include "physac.h"
-#endif*/
+#endif
 
 class Engine
 {
@@ -21,14 +21,14 @@ class Engine
 
 		static bool finishApp;
 
-		static void Init(const char *title, int gameWidth, int gameHeight, int scaling = 1);
+		static void Init(const char *title, int gameWidth, int gameHeight, float scaling = 1.0f);
 		static void SwitchFullscreen();
 		static void GameLoop();
 
 	private:
 
 		static bool useScaling;
-		static int scaling;
+		static float scaling;
 		static RenderTexture2D scalingTexture;
 		static Rectangle srcScaling;
 		static Rectangle dstScaling;

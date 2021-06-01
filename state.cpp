@@ -5,13 +5,13 @@
 map<string, State> State::stateList;
 State *State::active;
 
-void State::AddState(State *state, string name, bool go)
+void State::AddState(State& state, string name, bool go)
 {
-	stateList.insert(make_pair(name, *state));
+	stateList.insert(make_pair(name, state));
 
 	if (go)
 	{
-		active = state;
+		active = &state;
 		active->Init();
 	}
 }

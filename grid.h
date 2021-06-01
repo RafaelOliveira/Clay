@@ -11,7 +11,7 @@ class Grid
 		int rows;
 		bool** data;
 
-		void Init(Tilemap *tilemap, int solidTiles[], int arraySize);
+		void Init(Tilemap& tilemap, int solidTiles[], int arraySize);
 		void InitEmpty(int columns, int rows);
 		void SetTile(int tx, int ty, bool solid = true);
 		bool GetTile(int tx, int ty);

@@ -6,27 +6,27 @@ int Engine::gameWidth = 0;
 int Engine::gameHeight = 0;
 
 bool Engine::useScaling = false;
-int Engine::scaling = 1;
+float Engine::scaling = 1.0f;
 RenderTexture2D Engine::scalingTexture;
 Rectangle Engine::srcScaling { 0.0, 0.0, 0.0, 0.0 };
 Rectangle Engine::dstScaling { 0.0, 0.0, 0.0, 0.0 };
 bool Engine::finishApp = false;
 
-void Engine::Init(const char *title, int gameWidth, int gameHeight, int scaling)
+void Engine::Init(const char *title, int screenWidth, int screenHeight, float scaling)
 {
-	Engine::gameWidth = gameWidth;
-	Engine::gameHeight = gameHeight;
+	Engine::screenWidth = screenWidth;
+	Engine::screenHeight = screenHeight;
 
 	Engine::scaling = scaling;
 
-	Engine::screenWidth = gameWidth * scaling;
-	Engine::screenHeight = gameHeight * scaling;
+	Engine::gameWidth = screenWidth / scaling;
+	Engine::gameHeight = screenHeight / scaling;
 	
 	InitWindow(screenWidth, screenHeight, title);
 
-	/*#ifdef PHYSAC_IMPLEMENTATION
+	#ifdef PHYSAC_IMPLEMENTATION
 	InitPhysics();
-	#endif*/
+	#endif
 
 	SetTargetFPS(60);
 
@@ -107,9 +107,9 @@ void Engine::GameLoop()
 	}
 
 	// De-Initialization
-	/*#ifdef PHYSAC_IMPLEMENTATION
+	#ifdef PHYSAC_IMPLEMENTATION
 	ClosePhysics();
-	#endif*/
+	#endif
 
 	// Close window and OpenGL context
 	CloseWindow();

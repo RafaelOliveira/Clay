@@ -15,6 +15,7 @@ class Body
 
 		void SetHitbox(float x, float y, int width, int height);
 		void CheckPlatformTileCollision(Grid *grid, Vector2 *velocity, int tileWidth, int tileHeight);
+		void CheckFreeTileCollision(Grid& grid, Vector2& velocity, int tileWidth, int tileHeight);
 };
 
 #endif

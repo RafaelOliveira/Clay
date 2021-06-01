@@ -1,9 +1,11 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
+#include <vector>
 #include <string>
 #include "raylib.h"
 #include "tileset.h"
+#include "util.h"
 
 class Tilemap
 {
@@ -25,6 +27,7 @@ class Tilemap
 		void ClearTile(int x, int y);
 		bool CheckPositionInside(int px, int py);
 		void LoadEmpty(int columns, int rows);
+		void LoadFromString(string& content);
 		void CopyFrom2DArray(int **array);
 		static vector<Tilemap> CreateFromPyxelEdit(const string &fileName, Tileset& tileset);
 		static vector<Tilemap> CreateFromPyxelEditString(const string& content, Tileset& tileset);

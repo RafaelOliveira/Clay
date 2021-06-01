@@ -61,6 +61,31 @@ void Tilemap::LoadEmpty(int columns, int rows)
 	}
 }
 
+void Tilemap::LoadFromString(string& content)
+{
+	vector<string> lines = split(content, ';');
+
+	rows = (int)lines.size();
+
+	data = new int* [rows];
+
+	for (int y = 0; y < rows; y++)
+	{
+		vector<string> items = split(lines[y], ',');
+
+		if (y == 0)
+			columns = (int)items.size();
+
+		data[y] = new int[columns];
+
+		for (int x = 0; x < columns; x++)
+			data[y][x] = stoi(items[x]);
+	}
+
+	height = rows * GetTileHeight();
+	width = columns * GetTileWidth();
+}
+
 void Tilemap::CopyFrom2DArray(int **array)
 {
 	for (int y = 0; y < rows; ++y)
@@ -79,7 +104,6 @@ vector<Tilemap> Tilemap::CreateFromPyxelEdit(const string &fileName, Tileset &ti
 		std::cerr << "(Tilemap.CreateFromPyxelEdit) file " + fileName + " not found";
 		exit(1);
 	}
-	
 	
 	const string content = string(LoadFileText(fileNameStr));
 	
